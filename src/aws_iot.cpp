@@ -34,10 +34,30 @@ bool AwsIot::connect()
     return true;
 }
 
-void AwsIot::publishMessage(StaticJsonDocument<512> json, string aws_iot_topic)
+string AwsIot::publish(StaticJsonDocument<512> json, string aws_iot_topic)
+{
+    if (connected() || connect())
+    {
+        return publishMessage(json, aws_iot_topic);
+    }
+    return "{}";
+}
+
+bool AwsIot::refresh()
+{
+    return client->loop();
+}
+
+bool AwsIot::connected()
+{
+    return client->connected();
+}
+
+string AwsIot::publishMessage(StaticJsonDocument<512> json, string aws_iot_topic)
 {
     char jsonBuffer[512];
     serializeJson(json, jsonBuffer);
-    Serial.println(jsonBuffer);
-    client->publish(aws_iot_topic.c_str(), jsonBuffer);
+    if (client->publish(aws_iot_topic.c_str(), jsonBuffer))
+        return string(jsonBuffer);
+    return "{}";
 }

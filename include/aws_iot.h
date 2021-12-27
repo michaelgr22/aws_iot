@@ -21,11 +21,15 @@ private:
     string device_name;
     int aws_max_reconnect_tries;
 
+    string publishMessage(StaticJsonDocument<512> json, string aws_iot_topic);
+
 public:
     AwsIot(string aws_cert_ca, string aws_cert_crt, string aws_cert_private, string aws_iot_endpoint, string device_name, int aws_max_reconnect_tries = 50);
     ~AwsIot();
     bool connect();
-    void publishMessage(StaticJsonDocument<512> json, string aws_iot_topic);
+    string publish(StaticJsonDocument<512> json, string aws_iot_topic);
+    bool connected();
+    bool refresh();
 };
 
 #endif
