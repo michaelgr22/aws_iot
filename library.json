@@ -1,5 +1,5 @@
 {
-    "name": "AWS Iot",
+    "name": "AWSIot",
     "description": "Library to easily connect and work with AWS Iot",
     "keywords": "aws, iot",
     "authors": {
@@ -10,7 +10,7 @@
         "type": "git",
         "url": "https://github.com/michaelgr22/aws_iot.git"
     },
-    "version": "0.0.22",
+    "version": "0.0.30",
     "license": "MIT",
     "frameworks": "arduino",
     "platforms": [
